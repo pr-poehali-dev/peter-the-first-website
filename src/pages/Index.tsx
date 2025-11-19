@@ -90,6 +90,22 @@ function Index() {
     }
   ];
 
+  const friends = [
+    { name: 'Франц Лефорт', role: 'Адмирал, соратник', avatar: 'ФЛ' },
+    { name: 'Александр Меншиков', role: 'Генералиссимус', avatar: 'АМ' },
+    { name: 'Фёдор Апраксин', role: 'Генерал-адмирал', avatar: 'ФА' },
+    { name: 'Яков Брюс', role: 'Генерал-фельдмаршал', avatar: 'ЯБ' },
+    { name: 'Борис Шереметев', role: 'Фельдмаршал', avatar: 'БШ' },
+    { name: 'Пётр Толстой', role: 'Дипломат', avatar: 'ПТ' }
+  ];
+
+  const quotes = [
+    'Я царь, я раб, я червь, я Бог!',
+    'Промедление смерти подобно',
+    'Аз есмь в чину учимых и учащих мя требую',
+    'Делу время, потехе час'
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
       <div className="relative bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 text-white overflow-hidden">
@@ -438,6 +454,45 @@ function Index() {
 
                 <Separator className="my-6" />
 
+                <div className="bg-gradient-to-br from-slate-50 to-slate-100 p-6 rounded-lg mb-8">
+                  <h3 className="text-xl font-semibold mb-4 flex items-center">
+                    <Icon name="Info" size={22} className="mr-2 text-blue-600" />
+                    Детальная информация
+                  </h3>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-4">
+                      <div>
+                        <p className="text-sm text-gray-500 mb-1">Политические взгляды:</p>
+                        <p className="font-medium">Абсолютная монархия, централизация власти</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-500 mb-1">Экономические взгляды:</p>
+                        <p className="font-medium">Меркантилизм, протекционизм, развитие мануфактур</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-500 mb-1">Религиозные взгляды:</p>
+                        <p className="font-medium">Православие, подчинение церкви государству</p>
+                      </div>
+                    </div>
+                    <div className="space-y-4">
+                      <div>
+                        <p className="text-sm text-gray-500 mb-1">Деятельность:</p>
+                        <p className="font-medium">Реформы, строительство флота и городов, ведение войн, модернизация России</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-500 mb-1">Любимые цитаты:</p>
+                        <div className="space-y-2">
+                          {quotes.map((quote, idx) => (
+                            <p key={idx} className="text-sm italic text-gray-700">«{quote}»</p>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <Separator className="my-6" />
+
                 <div className="grid md:grid-cols-2 gap-6 mb-8">
                   <div className="space-y-3">
                     <div className="flex items-center gap-3">
@@ -472,8 +527,35 @@ function Index() {
 
                 <Separator className="my-6" />
 
+                <div className="mb-8">
+                  <h3 className="text-2xl font-semibold mb-4 flex items-center">
+                    <Icon name="Megaphone" size={24} className="mr-2 text-blue-600" />
+                    Что у вас нового?
+                  </h3>
+                  <Card className="bg-blue-50 border-2 border-blue-200">
+                    <CardContent className="pt-6">
+                      <div className="flex items-start gap-4">
+                        <Icon name="Sparkles" size={24} className="text-blue-600 mt-1" />
+                        <div>
+                          <p className="text-lg font-medium text-blue-900 mb-2">
+                            Российская Империя провозглашена!
+                          </p>
+                          <p className="text-gray-700">
+                            После победы в Северной войне Россия получила статус империи. Санкт-Петербург процветает, флот укрепляется, реформы продолжаются. Наука и образование на подъёме!
+                          </p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                <Separator className="my-6" />
+
                 <div className="space-y-6">
-                  <h3 className="text-2xl font-semibold mb-4">Записи на стене</h3>
+                  <h3 className="text-2xl font-semibold mb-4 flex items-center">
+                    <Icon name="ScrollText" size={24} className="mr-2 text-blue-600" />
+                    Записи на стене
+                  </h3>
 
                   {vkPosts.map((post, index) => (
                     <Card key={index} className="border-2 hover:shadow-lg transition-shadow">
@@ -509,6 +591,28 @@ function Index() {
                       </CardContent>
                     </Card>
                   ))}
+                </div>
+
+                <Separator className="my-8" />
+
+                <div className="mb-8">
+                  <h3 className="text-2xl font-semibold mb-4 flex items-center">
+                    <Icon name="Users" size={24} className="mr-2 text-blue-600" />
+                    Друзья <span className="text-lg text-gray-500 ml-2">{friends.length}</span>
+                  </h3>
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                    {friends.map((friend, index) => (
+                      <Card key={index} className="hover:shadow-lg transition-shadow cursor-pointer">
+                        <CardContent className="pt-6 text-center">
+                          <Avatar className="w-16 h-16 mx-auto mb-3">
+                            <AvatarFallback className="bg-blue-600 text-white text-sm">{friend.avatar}</AvatarFallback>
+                          </Avatar>
+                          <p className="font-semibold text-sm mb-1">{friend.name}</p>
+                          <p className="text-xs text-gray-500">{friend.role}</p>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
                 </div>
 
                 <div className="mt-8 p-6 bg-blue-50 rounded-lg text-center">
